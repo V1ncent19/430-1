@@ -115,7 +115,7 @@ Say we have a family of $ \sigma $-algebras indexed by $ \mathcal{I} $: $ \{(E,\
 \begin{itemize}[topsep=2pt,itemsep=0pt]
     \item \textbf{Empty set}: Since $ \forall i\in \mathcal{I} $ we have $ \emptyset, E \in \mathcal{E}_i $, we have $ \emptyset, E\in \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $.
     \item \textbf{Closed under complement}: For any $ A\in \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $, we have $ A\in \mathcal{E}_i, \forall i\in \mathcal{I} $. Thus $ A^c\in \mathcal{E}_i, \forall i\in \mathcal{I} $, which implies $ A^c\in \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $.
-    \item \textbf{Closed under $ \sigma  $-union}: For any $ \{A_n\}_{n\in \mathbb{N}}\subset \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $, we have $ A_n\in \mathcal{E}_i, \forall i\in \mathcal{I} $. Thus $ \bigcup_{n\in \mathbb{N}} A_n\in \mathcal{E}_i, \forall i\in \mathcal{I} $, which implies $ \bigcup_{n\in \mathbb{N}} A_n\in \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $.
+    \item \textbf{Closed under $ \sigma  $-union}: For any $ \{A_n\}_{n\in \mathbb{N}}\subseteq \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $, we have $ A_n\in \mathcal{E}_i, \forall i\in \mathcal{I} $. Thus $ \bigcup_{n\in \mathbb{N}} A_n\in \mathcal{E}_i, \forall i\in \mathcal{I} $, which implies $ \bigcup_{n\in \mathbb{N}} A_n\in \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $.
 \end{itemize}
 By verifying the three properties, we conclude that $ \bigcap_{i\in \mathcal{I}} \mathcal{E}_i $ is a $ \sigma $-algebra.
 
@@ -170,7 +170,7 @@ which implies that $ \mathcal{E} $ is not closed under countable union. Thus $ \
 
 \begin{itemize}[topsep=2pt,itemsep=0pt]
     \item Any $ \sigma $-algebra containing all open sets must contain all open intervals, which is trivial. (And definitely we have $ \mathcal{B}_\mathbb{R} $ being a $ \sigma $-algebra, and it contains all open intervals.)
-    \item Then consider any $ \sigma $-algebra $ \mathcal{A} $ containing all open intervals. In this case, for any open sets $ O \subset \mathbb{R} $, by definition, $ \exists $ intervals $ \{I_i\}_{i\in\mathbb{N}^+} $ s.t.
+    \item Then consider any $ \sigma $-algebra $ \mathcal{A} $ containing all open intervals. In this case, for any open sets $ O \subseteq \mathbb{R} $, by definition, $ \exists $ intervals $ \{I_i\}_{i\in\mathbb{N}^+} $ s.t.
     \begin{align*}
         O=\bigcup_{i\in \mathbb{N}^+} I_i. 
     \end{align*}
@@ -197,14 +197,14 @@ We verify the following cases:
 We first prove the following lemma:
 
 \begin{point}
-    For a collection of intervals $ G=\{g_i\}_{i\in\mathcal{I}} $ (could be uncountable). If any open set $ O\subset \mathbb{R} $ can be written as \textbf{countable} operations of $ g_i $ (operations include union, intersection, and complement), then $ \mathcal{B}_\mathbb{R} $ is also the generated $ \sigma $-algebra by $ G $.
+    For a collection of intervals $ G=\{g_i\}_{i\in\mathcal{I}} $ (could be uncountable). If any open set $ O\subseteq \mathbb{R} $ can be written as \textbf{countable} operations of $ g_i $ (operations include union, intersection, and complement), then $ \mathcal{B}_\mathbb{R} $ is also the generated $ \sigma $-algebra by $ G $.
 \end{point}
 
 \begin{proof}
     The proof is similar to that in \ref{openintervals}.
     \begin{itemize}[topsep=2pt,itemsep=0pt]
         \item Since $ G $ is a collection of intervals, then any $ \sigma  $-algebra containing all open sets must also contain all elements in $ G $.
-        \item On the other hand, for any $ \sigma  $-algebra $ \mathcal{A} $ containing all elements in $ G $, then for any open set $ O\subset \mathbb{R} $, by assumption, $ O $ can be written as a countable operation of $ g_i $, i.e. $ O\in \mathcal{A} $. While $ g_i\in  \mathcal{A} $ gives that this countable operation is also in $ \mathcal{A} $. Thus $ O\in \mathcal{A} $, which implies that $ \mathcal{A} $ contains all open sets.
+        \item On the other hand, for any $ \sigma  $-algebra $ \mathcal{A} $ containing all elements in $ G $, then for any open set $ O\subseteq \mathbb{R} $, by assumption, $ O $ can be written as a countable operation of $ g_i $, i.e. $ O\in \mathcal{A} $. While $ g_i\in  \mathcal{A} $ gives that this countable operation is also in $ \mathcal{A} $. Thus $ O\in \mathcal{A} $, which implies that $ \mathcal{A} $ contains all open sets.
     \end{itemize}
     By summarizing the two points, we conclude that $ \mathcal{B}_\mathbb{R} $ is also the generated $ \sigma $-algebra by $ G $.
 \end{proof}
@@ -226,26 +226,26 @@ Further, to upgrade to rational number cases, we may just notice that any real n
 
 We have the following two points:
 \begin{itemize}[topsep=2pt,itemsep=0pt]
-    \item Consider any $ \sigma  $-algebra $ \tilde{\mathcal{E}} $ that makes all continuous functions measurable. $ \mathcal{B}_{\mathbb{R}^n} \subset \tilde{\mathcal{E}} $.
+    \item Consider any $ \sigma  $-algebra $ \tilde{\mathcal{E}} $ that makes all continuous functions measurable. $  \tilde{\mathcal{E}}  \subseteq \mathcal{B}_{\mathbb{R}^n}$.
     
     \begin{proof}
         For any continuous function $ f:(\mathbb{R}^n, \mathcal{B}_{\mathbb{R}^n})\mapsto (\mathbb{R}, \mathcal{B}_{\mathbb{R}}) $, we can check for
         \begin{align*}
             f^{-1}((-\infty, x)) = \{\omega \in \mathbb{R}^n: f(\omega )< x\} \in \mathcal{B}_{\mathbb{R}^n}
         \end{align*}
-        which is obvious form the definition of continuous functions. Thus we have $ \mathcal{B}_{\mathbb{R}^n} \subset \tilde{\mathcal{E}} $.
+        which is obvious form the definition of continuous functions. Thus we have $  \tilde{\mathcal{E}}  \subseteq \mathcal{B}_{\mathbb{R}^n}$.
     \end{proof}
 
-    So further, denote $ \mathcal{E} $ the minimal $ \sigma  $-algebra that makes all continuous functions measurable, we have also $ \mathcal{B}_{\mathbb{R}^n} \subset \mathcal{E} $.
+    So further, denote $ \mathcal{E} $ the minimal $ \sigma  $-algebra that makes all continuous functions measurable, we have also $  \mathcal{E}  \subseteq \mathcal{B}_{\mathbb{R}^n} $.
 
-    \item If a $ \sigma  $-algebra $ \mathcal{E} $ is the smallest one that makes all continuous functions measurable, then $ \mathcal{E} \subset \mathcal{B}_{\mathbb{R}^n} $.
+    \item If a $ \sigma  $-algebra $ \mathcal{E} $ is the smallest one that makes all continuous functions measurable, then $ \mathcal{B}_{\mathbb{R}^n} \subseteq  \mathcal{E}$.
     
     \begin{proof}
-        It suffices to show that for such $ \mathcal{E} $, it has to contain all closed sets. So consider any given closed set $ C\subset \mathbb{R}^n $ and a corresponding continuous function $ f_C(\omega ) $ defined as the distance of $ \omega  $ to $ C $, i.e. $ f_C(\omega ) = \mathop{ \inf  }\limits_{x\in C} \|\omega -x\| $. Then $ f_C $ is continuous, and thus $ f_C^{-1}(\{0\}) = C\in \mathcal{E} $. Such construction is possible for any closed set $ C\in\mathbb{R}^n $, so $ \mathcal{E} $ contains all closed sets, while these closed sets generate $ \mathcal{B}_{\mathbb{R}^n} $. So we have $ \mathcal{E} \subset \mathcal{B}_{\mathbb{R}^n} $.
+        It suffices to show that for such $ \mathcal{E} $, it has to contain all closed sets. So consider any given closed set $ C\subseteq \mathbb{R}^n $ and a corresponding continuous function $ f_C(\omega ) $ defined as the distance of $ \omega  $ to $ C $, i.e. $ f_C(\omega ) = \mathop{ \inf  }\limits_{x\in C} \|\omega -x\| $. Then $ f_C $ is continuous, and thus $ f_C^{-1}(\{0\}) = C\in \mathcal{E} $. Such construction is possible for any closed set $ C\in\mathbb{R}^n $, so $ \mathcal{E} $ contains all closed sets, while these closed sets generate $ \mathcal{B}_{\mathbb{R}^n} $. So we have $ \mathcal{B}_{\mathbb{R}^n} \subseteq  \mathcal{E} $.
     \end{proof}
 \end{itemize}
     
-    Combining the above two points, we conclude that $ \mathcal{B}_{\mathbb{R}^n} \subset \mathcal{E} \subset \mathcal{B}_{\mathbb{R}^n} $, which implies that $ \mathcal{E} = \mathcal{B}_{\mathbb{R}^n} $. i.e. the Borel $ \sigma $-algebra on $ \mathbb{R}^n $ is the smallest $ \sigma $-algebra that makes all continuous functions measurable.
+    Combining the above two points, we conclude that $ \mathcal{B}_{\mathbb{R}^n} \subseteq \mathcal{E} \subseteq \mathcal{B}_{\mathbb{R}^n} $, which implies that $ \mathcal{E} = \mathcal{B}_{\mathbb{R}^n} $. i.e. the Borel $ \sigma $-algebra on $ \mathbb{R}^n $ is the smallest $ \sigma $-algebra that makes all continuous functions measurable.
 
 
 
@@ -264,7 +264,7 @@ We have the following two points:
 We verify the conditions of a measure:
 \begin{itemize}[topsep=2pt,itemsep=0pt]
     \item \textbf{Empty set}: Since $ \mu $ is a measure, we have $ \nu(\emptyset)=\mu (\emptyset \cap D) = \mu(\emptyset) =0 $
-    \item \textbf{Countable additivity}: For any disjoint sets $ \{A_n\}_{n\in \mathbb{N}}\subset \mathcal{E}$, we have also $ \{A_n\cap D\}_{n\in \mathbb{N}}\subset \mathcal{E} $ being disjoint. Then
+    \item \textbf{Countable additivity}: For any disjoint sets $ \{A_n\}_{n\in \mathbb{N}}\subseteq \mathcal{E}$, we have also $ \{A_n\cap D\}_{n\in \mathbb{N}}\subseteq \mathcal{E} $ being disjoint. Then
     \begin{align*}
         \nu(\biguplus_{n\in \mathbb{N}} A_n) = \mu\left( \left( \biguplus_{n\in \mathbb{N}} A_n \right) \cap D \right) = \mu\left( \biguplus_{n\in \mathbb{N}} (A_n\cap D) \right) = \sum_{n\in \mathbb{N}} \mu(A_n\cap D) = \sum_{n\in \mathbb{N}} \nu(A_n).
     \end{align*}   
@@ -278,7 +278,7 @@ Thus $ \nu $ is a measure on $ (E,\mathcal{E}) $.
 We verify the conditions of a measure:
 \begin{itemize}[topsep=2pt,itemsep=0pt]
     \item \textbf{Empty set}: Since $ \mathcal{D}=\mathcal{E}\cap D $, thus $ \emptyset \in \mathcal{D} $. We have $ \nu(\emptyset) = \mu (\emptyset )=0 $.
-    \item \textbf{Countable additivity}: For any disjoint sets $ \{A_n\}_{n\in \mathbb{N}}\subset \mathcal{D} \subset \mathcal{E}$, we thus have $ \nu (\biguplus_{n\in \mathbb{N}} A_n) = \mu \left( \biguplus_{n\in \mathbb{N}} A_n \right) = \sum_{n\in \mathbb{N}} \mu(A_n) = \sum_{n\in \mathbb{N}} \nu(A_n) $.
+    \item \textbf{Countable additivity}: For any disjoint sets $ \{A_n\}_{n\in \mathbb{N}}\subseteq \mathcal{D} \subseteq \mathcal{E}$, we thus have $ \nu (\biguplus_{n\in \mathbb{N}} A_n) = \mu \left( \biguplus_{n\in \mathbb{N}} A_n \right) = \sum_{n\in \mathbb{N}} \mu(A_n) = \sum_{n\in \mathbb{N}} \nu(A_n) $.
 \end{itemize}
 
 Thus $ \nu $ is a measure on $ (D,\mathcal{D}) $.
