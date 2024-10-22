@@ -159,7 +159,30 @@ which concludes the proof.
 
 Thus the two sides are not equal, and the limit cannot be interchanged with the integral. 
 
-To explain why this happens, we illustrate the following that there is no dominating function for the sequence of functions $ \{f_\lambda (x)\}_{\lambda>0} $: for any $ x\in\mathbb{R}^+ $, and any $ \varepsilon \in (0,1) $, we can find $ \lambda_\varepsilon  $ s.t. $ \lambda_\varepsilon  e^{-\lambda_\varepsilon  x} = \varepsilon $, thus to dominate the sequence, we need to have $ g(x) \geq \varepsilon $, $ \forall x\in\mathbb{R}^+ $, which makes $ g(x) $ un-integrable. Thus there is no dominating function for the sequence of functions, and the condition of Lebesgue's dominated convergence theorem is not satisfied.
+To explain why this happens, we illustrate the following that there is no dominating function for the sequence of functions $ \{f_\lambda (x)\}_{\lambda>0} $: for any $ x\in\mathbb{R}^+ $, and any given $ \varepsilon \in (0,1) $, we note that function $ \lambda \mapsto \lambda e^{-\lambda x} $ reaches maximum of $ \dfrac{ 1 }{ ex }  $ at $ \lambda =\dfrac{ 1 }{ x }  $, thus consider the function sequence:
+\begin{align*}
+    \mathcal{F}:=\{f_{\tilde{\lambda }}, \, \tilde{\lambda } = \dfrac{ 1 }{ n } \}_{n\in\mathbb{N}^+} 
+\end{align*}
+which shares the same limit as the orginal sequence. For this sequence we notice that:
+\begin{align*}
+    \text{for }x\in[n-1,n),\text{ we have }f_{1/n}(x)>f_{1/n}(n)=\dfrac{ 1 }{ ne },
+\end{align*}
+thus to bound all $ f_{\tilde{\lambda }}\in\mathcal{F} $, we must have some $ g $ satisfying 
+\begin{align*}
+    g(x) > \dfrac{ 1 }{ ne },\quad x\in [n-1,n),\quad n\in\mathbb{N}^+
+\end{align*}
+thus
+\begin{align*}
+    \int_0^\infty g(x)\,\mathrm{d}x = \sum_{n=1}^\infty \int_{n-1}^n g(x)\,\mathrm{d}x \geq \sum_{n=1}^\infty \dfrac{ 1 }{ ne } =\infty
+\end{align*}
+which is not integrable on $ \mathbb{R}^+ $ by noticing that $ \sum_{n=1}^\infty \dfrac{ 1 }{ n} =\infty $. Thus we cannnot find a dominating function for the sequence $ \{f_\lambda (x)\}_{\lambda>0} $, thus the limit cannot be interchanged with the integral.
+
+
+
+ 
+
+
+
 
 \section{On interchanging integrals}
 
