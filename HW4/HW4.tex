@@ -136,13 +136,14 @@ Note that $ \mathbb{E}\left[ S_n \right] =0 $, $ \forall n $, using Chebyshev's 
     \mathbb{P}\left( \left\vert S_n \right\vert \geq n\varepsilon  \right)  \leq & \dfrac{ var(S_n) }{ n^2\varepsilon ^2 } 
 \end{align*}
 
-Now we study the variance of $ S_n $: denote $ var(X):=\sigma ^2 $, upper bound of $ r(\, \cdot \, ) $ being $ R $.
+Now we study the variance of $ S_n $: denote $ var(X):=\sigma ^2 $, upper bound of $ r(\, \cdot \, ) $ being $ \sup_{k\in\mathbb{N^+}} r(k) := R $.
 \begin{enumerate}[topsep=2pt,itemsep=0pt]
     \item Note that $ r(k)\xrightarrow[]{k\to \infty} 0 $, which implies that $ \forall \delta >0 $, $ \exists N $ s.t. $ \forall n\geq N $ we have $ 0< r(n)\leq \delta  $, then we have
     \begin{align*}
         var(S_n)=&  n\sigma^2 + \sum_{i=1}^{n-1} (n-i)r(i)\\
         \leq & n\sigma^2 + \sum_{i=1}^{N} (n-i)R + \sum_{i=N+1}^{n-1} (n-i)\delta\\
-        =& n\sigma^2 + \dfrac{ N(2n-N-1)R }{ 2 } + \dfrac{ (n-N-2)(n+N)\delta  }{ 2 }
+        =& n\sigma^2 + \dfrac{ N(2n-N-1)R }{ 2 } + \dfrac{ (n-N-2)(n+N)\delta  }{ 2 }\\
+        =& O(n) + O(n^2\delta )
     \end{align*}
     \item Here we consider first sending $ n\to\infty $, then $ \delta \to 0 $ to get: $ \forall \varepsilon >0 $
     \begin{align*}
