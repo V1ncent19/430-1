@@ -1,0 +1,389 @@
+\documentclass[11pt,a4paper]{article}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+
+\begin{document}
+
+\begin{center}\thispagestyle{plain}
+
+{\LARGE\textbf{STAT 430-1, Fall 2024}}
+
+{\Large\textbf{HW4}}
+
+Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
+\end{center}
+
+\thispagestyle{myheadings}\markright{Compiled using \LaTeX}
+\pagestyle{myheadings}\markright{Tuorui Peng}
+
+% show only sections level in contents
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+  
+
+% \section{Kronecker Lemma}
+
+% The condition $ \sum_{k=1}^\infty \dfrac{ a_k }{ k }<\infty  $ is equivalent to that: $ \forall  \varepsilon >0 $, there exists $ N $ such that $ \forall M>N $, $ \sum\limits_{k=N}^M \dfrac{ a_k }{ k }<\varepsilon  $. Then we have:
+% \begin{align*}
+%     \dfrac{ 1 }{ M  } \sum_{k=1}^M  a_k \leq & \dfrac{ 1 }{ M  } \sum_{k=1}^{N-1}  a_k + \sum_{k=N}^M  \dfrac{ a_k }{ k } \leq \dfrac{ 1 }{ M  } \sum_{k=1}^N  a_k + \varepsilon
+% \end{align*}
+% then by noticing that $ \dfrac{ 1 }{ M  } \sum\limits_{k=1}^{N-1}  a_k \xrightarrow[]{M\to\infty}  0 $, we are able to control the left side up to any precision. Thus we have
+% \begin{align*}
+%     \dfrac{ 1 }{ M  } \sum_{k=1}^M  a_k \to 0 ,\quad M\to\infty
+% \end{align*}
+
+
+
+\vspace{12pt}
+
+
+\hrule
+\vspace{12pt}
+
+\textbf{Notation:} I use $ \fallingdotseq $ for Fourier transform and $ \risingdotseq $ for inverse Fourier transform. i.e. $ f(x)\fallingdotseq \phi (t) $ and $ \phi (t)\risingdotseq f(x) $.
+
+
+
+\section{Weak LLN for weakly correlated random variables}
+
+
+Note that $ \mathbb{E}\left[ S_n \right] =0 $, $ \forall n $, using Chebyshev's inequality, we have
+\begin{align*}
+    \mathbb{P}\left( \left\vert S_n \right\vert \geq n\varepsilon  \right)  \leq & \dfrac{ var(S_n) }{ n^2\varepsilon ^2 } 
+\end{align*}
+
+Now we study the variance of $ S_n $: denote $ var(X):=\sigma ^2 $, upper bound of $ r(\, \cdot \, ) $ being $ R $.
+\begin{enumerate}[topsep=2pt,itemsep=0pt]
+    \item Note that $ r(k)\xrightarrow[]{k\to \infty} 0 $, which implies that $ \forall \delta >0 $, $ \exists N $ s.t. $ \forall n\geq N $ we have $ 0< r(n)\leq \delta  $, then we have
+    \begin{align*}
+        var(S_n)=&  n\sigma^2 + \sum_{i=1}^{n-1} (n-i)r(i)\\
+        \leq & n\sigma^2 + \sum_{i=1}^{N} (n-i)R + \sum_{i=N+1}^{n-1} (n-i)\delta\\
+        =& n\sigma^2 + \dfrac{ N(2n-N-1)R }{ 2 } + \dfrac{ (n-N-2)(n+N)\delta  }{ 2 }
+    \end{align*}
+    \item Here we consider first sending $ n\to\infty $, then $ \delta \to 0 $ to get: $ \forall \varepsilon >0 $
+    \begin{align*}
+        \mathbb{P}\left( \left\vert \dfrac{ S_n }{ n }  \right\vert \geq \varepsilon  \right) \leq &  \dfrac{ var(S_n) }{ n^2\varepsilon ^2 } 
+        \lesssim  \dfrac{ 1 }{ n\varepsilon ^2 } + \dfrac{ \delta  }{ \varepsilon ^2 }
+        \xrightarrow[]{n\to\infty} \dfrac{ \delta  }{ \varepsilon ^2 } 
+        \xrightarrow[\delta \in \mathbb{Q}]{\delta \to 0}  0 
+    \end{align*}
+
+\end{enumerate}
+
+Thus we have $ \dfrac{ S_n }{ n } \xrightarrow[]{\mathrm{p}} 0 $, as desired.
+
+    
+
+\section{Coupon collector's problem}
+
+We have the following bounds for $ \mathbb{P}\left( T_n > k \right)  $:
+\begin{align*}
+    (1-1/n)^k \mathop{ \leq  }\limits^{(1)}  & \mathbb{P}\left( T_n > k \right) \mathop{ \leq  }\limits^{(2)} n(1-1/n)^{k} .
+\end{align*}
+Proofs are as follows:
+\begin{enumerate}[topsep=2pt,itemsep=2pt]
+    \item We have
+    \begin{align*}
+        \mathbb{P}\left( T_n > k \right)= &\mathbb{P}\left( \bigcup _{i=1}^n \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
+        \geq & \mathbb{P}\left(  \big\{ \text{no draw of coupon }1\text{ in the first }k\text{ draws} \big\} \right) \\
+        = & \left( 1-1/n \right)^k
+    \end{align*}
+    \item We have
+    \begin{align*}
+        \mathbb{P}\left( T_n > k \right)= &\mathbb{P}\left( \bigcup _{i=1}^n \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
+        \leq & \sum_{i=1}^n \mathbb{P}\left( \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
+        = & n\left( 1-1/n \right)^k
+    \end{align*}
+\end{enumerate}
+
+Then we notive the following limits for any given $ \varepsilon  >0 $:
+\begin{align}\label{eq:1}
+    \begin{aligned}
+        \lim_{n\to\infty } \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } =& \lim_{n\to\infty } 1 + (1+\varepsilon  )\log \left( 1-\dfrac{ 1 }{ n }  \right)^n = -\varepsilon  \\
+    \lim_{n\to\infty } \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } =& \lim_{n\to\infty } (1-\varepsilon  )\log \left( 1-\dfrac{ 1 }{ n }  \right)^n = -1+\varepsilon 
+    \end{aligned}
+\end{align}
+
+Now to prove the convergence in probability, we use the following two sides: $ \forall \varepsilon >0 $
+\begin{align*}
+    \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n  }{ n\log n } \mathop{ \geq  } 1+\varepsilon   \right) \mathop{ = }\limits^{(1)} &0  \\
+    \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n  }{ n\log n } \mathop{ \geq } 1-\varepsilon   \right)  \mathop{ = }\limits^{(2)} &1
+\end{align*}
+
+
+\begin{enumerate}[topsep=2pt,itemsep=0pt]
+    \item Using \eqref{eq:1}, we have 
+    \begin{align*}
+        \lim_{n\to\infty } \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } =& -\varepsilon 
+    \end{align*}
+    which means there always exists some $ N $ s.t. $ \forall n>N $ we have 
+    \begin{align*}
+        \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } \leq -\varepsilon + \dfrac{ \varepsilon  }{ 2 } = -\dfrac{ \varepsilon  }{ 2 }  \Rightarrow n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \leq n^{-\varepsilon /2} \xrightarrow[]{n\to\infty} 0
+    \end{align*}
+    
+    Then we have
+    \begin{align*}
+        \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1+\varepsilon   \right) \leq & n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \xrightarrow[]{n\to\infty} 0 
+    \end{align*}
+
+    \item Using \eqref{eq:1}, we have (WLOG using $ \varepsilon <1/2 $)
+    \begin{align*}
+        \lim_{n\to\infty } \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } =& -1+\varepsilon 
+    \end{align*}
+    which means there always exists some $ N $ s.t. $ \forall n>N $ we have
+    \begin{align*}
+        \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } \geq -1+\varepsilon - \dfrac{ \varepsilon  }{ 2 } = -1 + \dfrac{ \varepsilon  }{ 2 } \Rightarrow (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \geq n^{-1+\varepsilon /2} ,\quad  n>N
+    \end{align*}
+    Then we have 
+    \begin{align*}
+        \sum_{n=1}^\infty \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) \geq & \sum_{n=1}^N \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) + \sum_{n=N+1}^\infty \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) \\
+        \geq & \sum_{n=1}^N \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) + \sum_{n=N+1}^\infty n^{-1+\varepsilon /2} = \infty
+    \end{align*}
+    and notice that we have independence of $ \{T_n\} $, thus by Borel-Cantelli lemma (2nd kind), we have
+    \begin{align*}
+        \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \text{ i.o.} \right) = 1  \Rightarrow \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) = 1
+    \end{align*}    
+\end{enumerate}
+
+Combining the two sides, we have
+\begin{align*}
+    \begin{cases}
+        \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1+\varepsilon   \right) = 0\\
+        \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon   \right) = 1
+    \end{cases}  \Rightarrow \dfrac{ T_n }{ n\log n }\xrightarrow[]{\mathrm{p}} 1 
+\end{align*}
+
+
+
+\section{"Almost" Law of the Iterated Logarithm}
+
+Denote the density function of standard normal distribution as $ \phi(x) $, and its derivative as $ \phi'(x)=-x\phi(x) $.
+
+\subsection{}
+For $ X\sim N(0,1) $:
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item Using integration by parts, we have
+    \begin{align*}
+        \mathbb{P}\left( X\geq x \right) =& \int_x^\infty \phi(t)\,\mathrm{d}t = \int _x^\infty (-\dfrac{ 1 }{ t } ) \phi '(t) \,\mathrm{d}t = \dfrac{ 1 }{ x } \phi(x) - \int _x^\infty \dfrac{ 1 }{ t^2 } \phi (t ) \,\mathrm{d}t \leq  \dfrac{ 1 }{ x } \phi(x) \tag{1}
+    \end{align*}
+    \item Using integration by parts again, we have
+    \begin{align*}
+        \mathbb{P}\left( X\geq x \right) =&\dfrac{ 1 }{ x } \phi(x) - \int _x^\infty \dfrac{ 1 }{ t^2 } \phi (t ) \,\mathrm{d}t = \dfrac{ 1 }{ x } \phi(x) -\int _x^\infty (-\dfrac{ 1 }{ t^3 }) \phi' (t ) \,\mathrm{d}t \\=& \dfrac{ 1 }{ x } \phi(x) - \dfrac{ 1 }{ x^3 } \phi(x) + \int _x^\infty \dfrac{ 3 }{ t^4 } \phi (t ) \,\mathrm{d}t \geq  \dfrac{ 1 }{ x } \phi(x) - \dfrac{ 1 }{ x^3 } \phi(x) \tag{2}
+    \end{align*}
+\end{itemize}
+Combining (1) and (2), we have
+\begin{align*}
+    \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \mathop{ \leq  }\limits^{(2)} & \mathbb{P}\left( X\geq x \right) \mathop{ \leq  }\limits^{(1)} \dfrac{ 1 }{ x } \phi(x) 
+\end{align*}
+
+
+
+\subsection{}
+We notice the following limits for $ n \to \infty $:\footnote{which is simple to verify by noticing that 
+\begin{align*}
+    \dfrac{ \log\log n }{ \log n } \xrightarrow[]{n\to\infty} 0 
+\end{align*}
+
+}
+\begin{align*}
+    \dfrac{ \log \left[ \dfrac{ 1 }{ x }\phi(x) \Big|_{x=\sqrt{1+\varepsilon }\sqrt{2\log n}} \right] }{ \log n } \xrightarrow[]{n\to\infty } -(1+\varepsilon )\tag{1}\\
+    \dfrac{ \log \left[ \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \Big|_{x=\sqrt{1-\varepsilon }\sqrt{2\log n}} \right] }{ \log n }   \xrightarrow[]{n\to\infty } -(1-\varepsilon )\tag{2}
+\end{align*}
+
+Now using the two bounds from part (a), we have
+\begin{enumerate}[topsep=2pt,itemsep=2pt]
+    \item For $ \varepsilon >0 $, we have
+    \begin{align*}
+        \mathbb{P}\left( X_n\geq \sqrt{1+\varepsilon }\sqrt{2\log n} \right) \leq &  \dfrac{ 1 }{ x }\phi(x) \Big|_{x=\sqrt{1+\varepsilon }\sqrt{2\log n}} 
+    \end{align*}
+    using the limit (1), we have for such $ \varepsilon /2 >0 $, there exists $ N $ s.t. $ \forall n>N $ we have
+    \begin{align*}
+        \dfrac{ \log \left[ \dfrac{ 1 }{ x }\phi(x) \Big|_{x=\sqrt{1+\varepsilon }\sqrt{2\log n}} \right] }{ \log n } \leq -(1+\varepsilon )+\dfrac{ \varepsilon  }{ 2 } = -1-\dfrac{ \varepsilon  }{ 2 } \Rightarrow \dfrac{ 1 }{ x }\phi(x) \Big|_{x=\sqrt{1+\varepsilon }\sqrt{2\log n}} \leq n^{-1-\varepsilon /2} ,\quad \forall n>N
+    \end{align*}
+    Then we have
+    \begin{align*}
+        \sum_{n=1}^\infty  \mathbb{P}\left( X_n\geq \sqrt{1+\varepsilon }\sqrt{2\log n} \right) \leq & \sum_{n=1}^N  \mathbb{P}\left( X_n\geq \sqrt{1+\varepsilon }\sqrt{2\log n} \right) + \sum_{n=N+1}^\infty n^{-1-\varepsilon /2} < \infty
+    \end{align*}
+    Then by Borel-Cantelli lemma (1st kind), we have
+    \begin{align*}
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1+\varepsilon }   \right) = 0 ,\quad \forall \varepsilon >0
+    \end{align*}
+    
+
+    
+    \item For $ \varepsilon >0 $, we have
+    \begin{align*}
+        \mathbb{P}\left( X_n\geq \sqrt{1-\varepsilon }\sqrt{2\log n} \right) \geq &  \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \Big|_{x=\sqrt{1-\varepsilon }\sqrt{2\log n}} 
+    \end{align*}
+    using the limit (2), we have for such $ \varepsilon /2 >0 $, there exists $ N $ s.t. $ \forall n>N $ we have
+    \begin{align*}
+        &\dfrac{ \log \left[ \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \Big|_{x=\sqrt{1-\varepsilon }\sqrt{2\log n}} \right] }{ \log n } \geq -(1-\varepsilon )-\dfrac{ \varepsilon  }{ 2 } = -1+\dfrac{ \varepsilon  }{ 2 } \\
+        \Rightarrow& \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \Big|_{x=\sqrt{1-\varepsilon }\sqrt{2\log n}} \geq n^{-1+\varepsilon /2} ,\quad \forall n>N 
+    \end{align*}
+    Then we have
+    \begin{align*}
+        \sum_{n=1}^\infty  \mathbb{P}\left( X_n\geq \sqrt{1-\varepsilon }\sqrt{2\log n} \right) \geq & \sum_{n=1}^N  \mathbb{P}\left( X_n\geq \sqrt{1-\varepsilon }\sqrt{2\log n} \right) + \sum_{n=N+1}^\infty n^{-1+\varepsilon /2} = \infty 
+    \end{align*}
+    And we notice that $ \{X_n\} $ are independent, thus by Borel-Cantelli lemma (2nd kind), we have
+    \begin{align*}
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1-\varepsilon }   \right) = 1 ,\quad \forall \varepsilon >0 
+    \end{align*}
+    
+\end{enumerate}
+
+
+Combining the two sides, we have
+\begin{align*}
+    \begin{cases}
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1+\varepsilon }   \right) = 0 ,\quad \forall \varepsilon >0\\
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1-\varepsilon }   \right) = 1 ,\quad \forall \varepsilon >0
+    \end{cases}  \Rightarrow \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }=1,\quad \text{a.s.}
+\end{align*}
+
+
+
+
+\subsection{}
+
+Notice that for Normal distribution, we have
+\begin{align*}
+    S_n=\sum_{i=1}^n X_i \sim N(0,n)
+\end{align*}
+
+Define a constant $ \varepsilon  $ accroding to $ C=\sqrt{2}\sqrt{1+\varepsilon } $, then we have
+\begin{align*}
+    \mathbb{P}\left( \dfrac{ S_n }{ \sqrt{n\log n} } >C  \right) =& \mathbb{P}\left( \dfrac{ X }{ \sqrt{2\log n} } > \sqrt{1+\varepsilon }  \right) \leq n^{-1-\varepsilon /2} \text{ eventually}
+\end{align*}
+Then following the same steps as in part (b), we have
+\begin{align*}
+    \sum_{n=1}^\infty \mathbb{P}\left( \dfrac{ S_n }{ \sqrt{n\log n} } >C  \right) < \infty 
+\end{align*}
+thus by Borel-Cantelli lemma (1st kind), we have
+\begin{align*}
+    \mathbb{P}\left( \limsup_{n\to\infty }\dfrac{ S_n }{ \sqrt{n \log n} } >C  \right) = 0  \Rightarrow \limsup_{n\to\infty }\dfrac{ S_n }{ \sqrt{n \log n} } \leq C ,\quad \text{a.s.}  
+\end{align*}
+
+
+\section{Poisson approximation to the Binomial distribution}
+
+Note that in HW3 we computed the following Fourier transform (characteristic function) for Poisson distribution and Binomial distribution:
+\begin{align*}
+    \text{Binom: }&\binom{n}{x}p^x(1-p)^{n-x} \fallingdotseq (pe^{it}+(1-p))^n \\
+    \text{Poisson: }&\frac{\lambda^x}{x!}e^{-\lambda} \fallingdotseq e^{\lambda(e^{it}-1)} 
+\end{align*}
+
+To show the convergence in distribution, we need to show the convergence of characteristic functions pointwisely. To do so, we notice that 
+\begin{align*}
+    \lim_{n\to\infty} \mathrm{ Binom }(n,p_n)\fallingdotseq  \lim_{n\to\infty} (p_ne^{it}+(1-p_n))^n =& \lim_{n\to\infty} (1+\dfrac{ 1 }{ n }(e^{it}-1)np_n )^n = e^{(e^{it}-1)\lambda} \risingdotseq\frac{\lambda^x}{x!}e^{-\lambda} \sim \mathrm{ Poi }(\lambda) 
+\end{align*}
+thus finishes the proof of convergence in distribution.
+
+
+
+
+
+\section{Exponential approximation to the geometric distribution}
+Note that in HW3 we computed the following Fourier transform (characteristic function) for Exponential distribution and Geometric distribution:
+\begin{align*}
+    \text{Expo: }&\lambda e^{-\lambda x} \fallingdotseq \dfrac{ \lambda  }{ \lambda -it } \\
+    \text{Geometric: }&p(1-p)^x \fallingdotseq \dfrac{ p }{ 1-(1-p)e^{it} } 
+\end{align*}
+
+To show the convergence in distribution, we need to show the convergence of characteristic functions pointwisely. To do so, we notice that
+\begin{align*}
+    \lim_{p\to 0} p\mathrm{ Geom }(p)\fallingdotseq &\lim_{p\to 0} \dfrac{ p }{ 1-(1-p)e^{itp} }  \\
+    =& \lim_{p\to 0} \dfrac{ 1 }{ (1+(p-1)it)e^{itp} } \\
+    =& \dfrac{ 1 }{ 1-it } \risingdotseq e^{-x} \sim \mathrm{ Exp }(1)  
+\end{align*}
+thus finishes the proof of convergence in distribution.
+
+
+
+
+
+
+\end{document}
