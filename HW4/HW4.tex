@@ -161,82 +161,89 @@ Thus we have $ \dfrac{ S_n }{ n } \xrightarrow[]{\mathrm{p}} 0 $, as desired.
 
 \section{Coupon collector's problem}
 
-We have the following bounds for $ \mathbb{P}\left( T_n > k \right)  $:
-\begin{align*}
-    (1-1/n)^k \mathop{ \leq  }\limits^{(1)}  & \mathbb{P}\left( T_n > k \right) \mathop{ \leq  }\limits^{(2)} n(1-1/n)^{k} .
-\end{align*}
-Proofs are as follows:
+
+
 \begin{enumerate}[topsep=2pt,itemsep=2pt]
-    \item We have
-    \begin{align*}
-        \mathbb{P}\left( T_n > k \right)= &\mathbb{P}\left( \bigcup _{i=1}^n \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
-        \geq & \mathbb{P}\left(  \big\{ \text{no draw of coupon }1\text{ in the first }k\text{ draws} \big\} \right) \\
-        = & \left( 1-1/n \right)^k
-    \end{align*}
-    \item We have
-    \begin{align*}
-        \mathbb{P}\left( T_n > k \right)= &\mathbb{P}\left( \bigcup _{i=1}^n \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
-        \leq & \sum_{i=1}^n \mathbb{P}\left( \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
-        = & n\left( 1-1/n \right)^k
-    \end{align*}
+    \item We have the following bounds for $ \mathbb{P}\left( T_n > k \right)  $:
+        \begin{align*}
+            (1-1/n)^k \mathop{ \leq  }\limits^{(a)}  & \mathbb{P}\left( T_n > k \right) \mathop{ \leq  }\limits^{(b)} n(1-1/n)^{k} .
+        \end{align*}
+
+        \begin{proof}
+            By writing the event $ T_n > k $ as the union of $ n $ events, we have
+            \begin{enumerate}[topsep=2pt,itemsep=2pt]
+                \item We have
+                \begin{align*}
+                    \mathbb{P}\left( T_n > k \right)= &\mathbb{P}\left( \bigcup _{i=1}^n \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
+                    \geq & \mathbb{P}\left(  \big\{ \text{no draw of coupon }1\text{ in the first }k\text{ draws} \big\} \right) \\
+                    = & \left( 1-1/n \right)^k
+                \end{align*}
+                \item We have
+                \begin{align*}
+                    \mathbb{P}\left( T_n > k \right)= &\mathbb{P}\left( \bigcup _{i=1}^n \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
+                    \leq & \sum_{i=1}^n \mathbb{P}\left( \big\{ \text{no draw of coupon }i\text{ in the first }k\text{ draws} \big\} \right) \\
+                    = & n\left( 1-1/n \right)^k
+                \end{align*}
+            \end{enumerate}
+        \end{proof}
+
+        \item Then we prove $ \displaystyle\lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n  }{ n\log n } \mathop{ \geq  } 1+\varepsilon   \right) =0 $:
+        \begin{proof}
+            First notice the following limits for any given $ \varepsilon  >0 $:
+            \begin{align*}
+                 \lim_{n\to\infty } \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } =& \lim_{n\to\infty } 1 + (1+\varepsilon  )\log \left( 1-\dfrac{ 1 }{ n }  \right)^n = -\varepsilon
+            \end{align*}
+            which means there always exists some $ N $ s.t. $ \forall n>N $ we have 
+            \begin{align*}
+                \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } \leq -\varepsilon + \dfrac{ \varepsilon  }{ 2 } = -\dfrac{ \varepsilon  }{ 2 }  \Rightarrow n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \leq n^{-\varepsilon /2} \xrightarrow[]{n\to\infty} 0
+            \end{align*}
+            
+            Then we have
+            \begin{align*}
+                \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1+\varepsilon   \right) \leq & n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \xrightarrow[]{n\to\infty} 0 
+            \end{align*}
+            
+        \end{proof}
+
+        \item Similarly we prove $ \displaystyle \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n  }{ n\log n } \mathop{ \geq  } 1-\varepsilon   \right) =1 $:
+        \begin{proof}
+            Notice the following limits for any given $ \varepsilon  >0 $:
+            \begin{align*}
+                 \lim_{n\to\infty } \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } =& \lim_{n\to\infty } (1-\varepsilon  )\log \left( 1-\dfrac{ 1 }{ n }  \right)^n = -1+\varepsilon 
+            \end{align*}
+            which means there always exists some $ N $ s.t. $ \forall n>N $ we have
+        \begin{align*}
+            \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } \geq -1+\varepsilon - \dfrac{ \varepsilon  }{ 2 } = -1 + \dfrac{ \varepsilon  }{ 2 } \Rightarrow (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \geq n^{-1+\varepsilon /2} ,\quad  n>N
+        \end{align*}
+        Then we have 
+        \begin{align*}
+            \sum_{n=1}^\infty \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) \geq & \sum_{n=1}^N \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) + \sum_{n=N+1}^\infty \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) \\
+            \geq & \sum_{n=1}^N \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) + \sum_{n=N+1}^\infty n^{-1+\varepsilon /2} = \infty
+        \end{align*}
+        and notice that we have independence of $ \{T_n\} $, thus by Borel-Cantelli lemma (2nd kind), we have
+        \begin{align*}
+            \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \text{ i.o.} \right) = 1  \Rightarrow \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) = 1
+        \end{align*}    
+            
+        \end{proof}
+        
+        \item Combining the two sides, we have
+            \begin{align*}
+                \begin{cases}
+                    \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1+\varepsilon   \right) = 0\\
+                    \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon   \right) = 1
+                \end{cases}  \Rightarrow \dfrac{ T_n }{ n\log n }\xrightarrow[]{\mathrm{p}} 1 
+            \end{align*}
+
 \end{enumerate}
 
-Then we notive the following limits for any given $ \varepsilon  >0 $:
-\begin{align}\label{eq:1}
-    \begin{aligned}
-        \lim_{n\to\infty } \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } =& \lim_{n\to\infty } 1 + (1+\varepsilon  )\log \left( 1-\dfrac{ 1 }{ n }  \right)^n = -\varepsilon  \\
-    \lim_{n\to\infty } \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } =& \lim_{n\to\infty } (1-\varepsilon  )\log \left( 1-\dfrac{ 1 }{ n }  \right)^n = -1+\varepsilon 
-    \end{aligned}
-\end{align}
-
-Now to prove the convergence in probability, we use the following two sides: $ \forall \varepsilon >0 $
-\begin{align*}
-    \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n  }{ n\log n } \mathop{ \geq  } 1+\varepsilon   \right) \mathop{ = }\limits^{(1)} &0  \\
-    \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n  }{ n\log n } \mathop{ \geq } 1-\varepsilon   \right)  \mathop{ = }\limits^{(2)} &1
-\end{align*}
-
-
-\begin{enumerate}[topsep=2pt,itemsep=0pt]
-    \item Using \eqref{eq:1}, we have 
-    \begin{align*}
-        \lim_{n\to\infty } \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } =& -\varepsilon 
-    \end{align*}
-    which means there always exists some $ N $ s.t. $ \forall n>N $ we have 
-    \begin{align*}
-        \dfrac{ \log \big[ n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \big] }{ \log n } \leq -\varepsilon + \dfrac{ \varepsilon  }{ 2 } = -\dfrac{ \varepsilon  }{ 2 }  \Rightarrow n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \leq n^{-\varepsilon /2} \xrightarrow[]{n\to\infty} 0
-    \end{align*}
     
-    Then we have
-    \begin{align*}
-        \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1+\varepsilon   \right) \leq & n(1-\frac{1}{n})^{(1+\varepsilon  )n\log n} \xrightarrow[]{n\to\infty} 0 
-    \end{align*}
 
-    \item Using \eqref{eq:1}, we have (WLOG using $ \varepsilon <1/2 $)
-    \begin{align*}
-        \lim_{n\to\infty } \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } =& -1+\varepsilon 
-    \end{align*}
-    which means there always exists some $ N $ s.t. $ \forall n>N $ we have
-    \begin{align*}
-        \dfrac{ \log \big[ (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \big] }{ \log n } \geq -1+\varepsilon - \dfrac{ \varepsilon  }{ 2 } = -1 + \dfrac{ \varepsilon  }{ 2 } \Rightarrow (1-\frac{1}{n})^{(1-\varepsilon  )n\log n} \geq n^{-1+\varepsilon /2} ,\quad  n>N
-    \end{align*}
-    Then we have 
-    \begin{align*}
-        \sum_{n=1}^\infty \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) \geq & \sum_{n=1}^N \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) + \sum_{n=N+1}^\infty \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) \\
-        \geq & \sum_{n=1}^N \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) + \sum_{n=N+1}^\infty n^{-1+\varepsilon /2} = \infty
-    \end{align*}
-    and notice that we have independence of $ \{T_n\} $, thus by Borel-Cantelli lemma (2nd kind), we have
-    \begin{align*}
-        \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \text{ i.o.} \right) = 1  \Rightarrow \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon  \right) = 1
-    \end{align*}    
-\end{enumerate}
 
-Combining the two sides, we have
-\begin{align*}
-    \begin{cases}
-        \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1+\varepsilon   \right) = 0\\
-        \lim_{n\to\infty} \mathbb{P}\left( \dfrac{ T_n }{ n\log n } > 1-\varepsilon   \right) = 1
-    \end{cases}  \Rightarrow \dfrac{ T_n }{ n\log n }\xrightarrow[]{\mathrm{p}} 1 
-\end{align*}
+
+
+
+
 
 
 
@@ -279,7 +286,7 @@ Now using the two bounds from part (a), we have
 \begin{enumerate}[topsep=2pt,itemsep=2pt]
     \item For $ \varepsilon >0 $, we have
     \begin{align*}
-        \mathbb{P}\left( X_n\geq \sqrt{1+\varepsilon }\sqrt{2\log n} \right) \leq &  \dfrac{ 1 }{ x }\phi(x) \Big|_{x=\sqrt{1+\varepsilon }\sqrt{2\log n}} 
+        \mathbb{P}\left( X_n> \sqrt{1+\varepsilon }\sqrt{2\log n} \right) \leq &  \dfrac{ 1 }{ x }\phi(x) \Big|_{x=\sqrt{1+\varepsilon }\sqrt{2\log n}} 
     \end{align*}
     using the limit (1), we have for such $ \varepsilon /2 >0 $, there exists $ N $ s.t. $ \forall n>N $ we have
     \begin{align*}
@@ -287,18 +294,18 @@ Now using the two bounds from part (a), we have
     \end{align*}
     Then we have
     \begin{align*}
-        \sum_{n=1}^\infty  \mathbb{P}\left( X_n\geq \sqrt{1+\varepsilon }\sqrt{2\log n} \right) \leq & \sum_{n=1}^N  \mathbb{P}\left( X_n\geq \sqrt{1+\varepsilon }\sqrt{2\log n} \right) + \sum_{n=N+1}^\infty n^{-1-\varepsilon /2} < \infty
+        \sum_{n=1}^\infty  \mathbb{P}\left( X_n> \sqrt{1+\varepsilon }\sqrt{2\log n} \right) \leq & \sum_{n=1}^N  \mathbb{P}\left( X_n> \sqrt{1+\varepsilon }\sqrt{2\log n} \right) + \sum_{n=N+1}^\infty n^{-1-\varepsilon /2} < \infty
     \end{align*}
     Then by Borel-Cantelli lemma (1st kind), we have
     \begin{align*}
-        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1+\varepsilon }   \right) = 0 ,\quad \forall \varepsilon >0
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }> \sqrt{1+\varepsilon }   \right) = 0 ,\quad \forall \varepsilon >0
     \end{align*}
     
 
     
     \item For $ \varepsilon >0 $, we have
     \begin{align*}
-        \mathbb{P}\left( X_n\geq \sqrt{1-\varepsilon }\sqrt{2\log n} \right) \geq &  \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \Big|_{x=\sqrt{1-\varepsilon }\sqrt{2\log n}} 
+        \mathbb{P}\left( X_n> \sqrt{1-\varepsilon }\sqrt{2\log n} \right) \geq &  \left(\dfrac{ 1 }{ x } - \dfrac{ 1 }{ x^3 }\right) \phi(x) \Big|_{x=\sqrt{1-\varepsilon }\sqrt{2\log n}} 
     \end{align*}
     using the limit (2), we have for such $ \varepsilon /2 >0 $, there exists $ N $ s.t. $ \forall n>N $ we have
     \begin{align*}
@@ -307,11 +314,11 @@ Now using the two bounds from part (a), we have
     \end{align*}
     Then we have
     \begin{align*}
-        \sum_{n=1}^\infty  \mathbb{P}\left( X_n\geq \sqrt{1-\varepsilon }\sqrt{2\log n} \right) \geq & \sum_{n=1}^N  \mathbb{P}\left( X_n\geq \sqrt{1-\varepsilon }\sqrt{2\log n} \right) + \sum_{n=N+1}^\infty n^{-1+\varepsilon /2} = \infty 
+        \sum_{n=1}^\infty  \mathbb{P}\left( X_n> \sqrt{1-\varepsilon }\sqrt{2\log n} \right) \geq & \sum_{n=1}^N  \mathbb{P}\left( X_n> \sqrt{1-\varepsilon }\sqrt{2\log n} \right) + \sum_{n=N+1}^\infty n^{-1+\varepsilon /2} = \infty 
     \end{align*}
     And we notice that $ \{X_n\} $ are independent, thus by Borel-Cantelli lemma (2nd kind), we have
     \begin{align*}
-        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1-\varepsilon }   \right) = 1 ,\quad \forall \varepsilon >0 
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }> \sqrt{1-\varepsilon }   \right) = 1 ,\quad \forall \varepsilon >0 
     \end{align*}
     
 \end{enumerate}
@@ -320,8 +327,8 @@ Now using the two bounds from part (a), we have
 Combining the two sides, we have
 \begin{align*}
     \begin{cases}
-        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1+\varepsilon }   \right) = 0 ,\quad \forall \varepsilon >0\\
-        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }\geq \sqrt{1-\varepsilon }   \right) = 1 ,\quad \forall \varepsilon >0
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }> \sqrt{1+\varepsilon }   \right) = 0 ,\quad \forall \varepsilon >0\\
+        \mathbb{P}\left( \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }> \sqrt{1-\varepsilon }   \right) = 1 ,\quad \forall \varepsilon >0
     \end{cases}  \Rightarrow \limsup _{n\to\infty }\dfrac{ X_n }{ \sqrt{2\log n}  }=1,\quad \text{a.s.}
 \end{align*}
 
@@ -345,7 +352,7 @@ Then following the same steps as in part (b), we have
 \end{align*}
 thus by Borel-Cantelli lemma (1st kind), we have
 \begin{align*}
-    \mathbb{P}\left( \limsup_{n\to\infty }\dfrac{ S_n }{ \sqrt{n \log n} } >C  \right) = 0  \Rightarrow \limsup_{n\to\infty }\dfrac{ S_n }{ \sqrt{n \log n} } \leq C ,\quad \text{a.s.}  
+    \forall C<\infty,\,\mathbb{P}\left( \limsup_{n\to\infty }\dfrac{ S_n }{ \sqrt{n \log n} } >C  \right) = 0  \Rightarrow \limsup_{n\to\infty }\dfrac{ S_n }{ \sqrt{n \log n} } < C ,\quad \text{a.s.}  
 \end{align*}
 
 
