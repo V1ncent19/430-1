@@ -1,0 +1,280 @@
+\documentclass[11pt,a4paper]{article}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+
+\begin{document}
+
+\begin{center}\thispagestyle{plain}
+
+{\LARGE\textbf{STAT 430-1, Fall 2024}}
+
+{\Large\textbf{HW5}}
+
+Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
+\end{center}
+
+\thispagestyle{myheadings}\markright{Compiled using \LaTeX}
+\pagestyle{myheadings}\markright{Tuorui Peng}
+
+% show only sections level in contents
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+  
+
+% \section{Kronecker Lemma}
+
+% The condition $ \sum_{k=1}^\infty \dfrac{ a_k }{ k }<\infty  $ is equivalent to that: $ \forall  \varepsilon >0 $, there exists $ N $ such that $ \forall M>N $, $ \sum\limits_{k=N}^M \dfrac{ a_k }{ k }<\varepsilon  $. Then we have:
+% \begin{align*}
+%     \dfrac{ 1 }{ M  } \sum_{k=1}^M  a_k \leq & \dfrac{ 1 }{ M  } \sum_{k=1}^{N-1}  a_k + \sum_{k=N}^M  \dfrac{ a_k }{ k } \leq \dfrac{ 1 }{ M  } \sum_{k=1}^N  a_k + \varepsilon
+% \end{align*}
+% then by noticing that $ \dfrac{ 1 }{ M  } \sum\limits_{k=1}^{N-1}  a_k \xrightarrow[]{M\to\infty}  0 $, we are able to control the left side up to any precision. Thus we have
+% \begin{align*}
+%     \dfrac{ 1 }{ M  } \sum_{k=1}^M  a_k \to 0 ,\quad M\to\infty
+% \end{align*}
+
+
+
+\vspace{12pt}
+
+
+\hrule
+\vspace{12pt}
+
+\textbf{Notation:} I use $ \fallingdotseq $ for Fourier transform and $ \risingdotseq $ for inverse Fourier transform. i.e. $ f(x)\fallingdotseq \phi (t) $ and $ \phi (t)\risingdotseq f(x) $. $ \mathrm{ Res }_f(x)  $ for the residue of $ f(x) $ at $ x $. Dirac delta function (at zero) is denoted as $ \delta (x) $ s.t. $ \int_{-\infty}^\infty \delta (x) \,\mathrm{d}x=1 $.
+
+
+
+\section{Characteristic functions}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item[(a)] Note that function $ t\mapsto 1/(1+t^2) $ has inverse Fourier transform as follows:
+    \begin{align*}
+        1/(1+t^2)\risingdotseq & \dfrac{ 1 }{ 2\pi } \int _\mathbb{R} \dfrac{ 1 }{ 1+t^2 }e^{-ixt}  \,\mathrm{d}t =\begin{cases}
+            \dfrac{ 2\pi i }{ 2\pi } \mathrm{ Res }_{e^{-ixt}/(1+t^2)}(i),& x>0\\
+            \dfrac{ 2\pi i }{ 2\pi } \mathrm{ Res }_{e^{-ixt}/(1+t^2)}(-i),& x\leq 0
+        \end{cases}= e^{-|x|}/2
+    \end{align*}
+    which is the density function of a two-sided exponential distribution.
+    \item[(b)] Not a characteristic function by noticing that $ t\mapsto e^{-t^4} $ is not bounded.
+    \item[(c)] Not a characteristic function by noticing that $ \sin(t)\big|_{t=0}=0\neq 1 $, thus does not satisfy the condition of Bochner's theorem.
+    \item[(d)] Note that $ t\mapsto \cos(t) $ has inverse Fourier transform as follows:
+    \begin{align*}
+        \cos(t)\risingdotseq & \dfrac{ 1 }{ 2\pi } \int _\mathbb{R} \cos(t)e^{-ixt}  \,\mathrm{d}t =\dfrac{ 1 }{ 2\pi } \int _\mathbb{R} \dfrac{ e^{it}+e^{-it} }{ 2 }e^{-ixt}  \,\mathrm{d}t =\dfrac{ 1 }{ 2 }(\delta (x+1)+\delta (x-1))
+        \sim \mathrm{ Unif }\{\pm 1\} 
+    \end{align*}
+    a uniform distribution on $ \{\pm 1\} $.
+    \item[(e)] Note that $ t\mapsto \dfrac{ 1+\cos(t) }{ 2 } $ has inverse Fourier transform as follows:
+    \begin{align*}
+        \dfrac{ 1+\cos(t) }{ 2 }\risingdotseq & \dfrac{ 1 }{ 2\pi } \int _\mathbb{R} \dfrac{ 1+\cos(t) }{ 2 }e^{-ixt}  \,\mathrm{d}t= \dfrac{ 1 }{ 2\pi } \int _\mathbb{R} \dfrac{ 1+\dfrac{ e^{it}+e^{-it} }{ 2 } }{ 2 }e^{-ixt}  \,\mathrm{d}t= \dfrac{ 1 }{ 4 }\big( \delta (x-1)+\delta (x+1) + 2\delta (x) \big)
+    \end{align*}
+    which is a discrete r.v. with $ P(X=1)=P(X=-1)=1/4 $ and $ P(X=0)=1/2 $.
+\end{itemize}
+
+    
+
+\section{Die roll plus uniform}\label{sec:die_roll_plus_uniform}
+
+
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item[(a)] For a fair die $ X $, we have
+    \begin{align*}
+         X\sim \mathrm{ Unif } \{1,2,3,4,5,6\} \fallingdotseq \dfrac{ 1 }{ 6 }\sum_{k=1}^6 e^{ i k t}
+    \end{align*}
+    \item[(b)] For $ Y $ uniform on $ [0,1] $, we have
+    \begin{align*}
+        Y\sim \mathrm{ Unif } [0,1] \fallingdotseq \dfrac{ e^{i t}-1 }{ it }  
+    \end{align*}
+    \item[(c)] For $ Z=X+Y $, we have
+    \begin{align*}
+        X+Y\fallingdotseq \dfrac{ 1 }{ 6 }\sum_{k=1}^6 e^{ i k t} \cdot \dfrac{ e^{i t}-1 }{ it } =\dfrac{ 1 }{ 6 }\sum_{k=1}^6 \dfrac{ e^{i (k+1) t}-e^{i k t} }{ it } =\dfrac{ e^{i 7 t}-e^{i t} }{ 6it } \risingdotseq \mathrm{ Unif } [1,7] 
+    \end{align*}
+    \item[(d)] For $ W=X-Y $, we have
+    \begin{align*}
+        X-Y\fallingdotseq \dfrac{ 1 }{ 6 }\sum_{k=1}^6 e^{ i k t} \cdot \overline{\dfrac{ e^{i t}-1 }{ it }} =& \dfrac{ 1 }{ 6 }\sum_{k=1}^6 e^{ i k t} \cdot \dfrac{ e^{-i t}-1 }{ -it } = \dfrac{ 1 }{ 6 }\sum_{k=1}^6 \dfrac{ e^{i (k-1) t}-e^{i k t} }{ -it } = \dfrac{ e^{i 6 t} -1 }{ 6it } \risingdotseq \mathrm{ Unif }[0,6]
+    \end{align*}
+\end{itemize}
+
+    
+\section{Difference of two i.i.d. random variables}
+
+Note that for two i.i.d. r.v. $ X,Y $ with characteristic function $ \phi(t) $, we have
+\begin{align*}
+    X-Y\fallingdotseq \phi(t)\cdot \overline{\phi(t)} =|\phi(t)|^2 \geq 0
+\end{align*}
+however for uniform distribution $ Z\sim \mathrm{ Unif }[-1,1]  $ we know that
+\begin{align*}
+    Z\sim \mathrm{ Unif }[-1,1] \fallingdotseq \dfrac{ \sin t }{ t } \text{ is not non-negative}
+\end{align*}
+which yields contradiction. Thus $ Z $ cannot be represented as the difference of two i.i.d. r.v.s.
+
+
+\section{Trigonometric identities}
+
+We define the following:
+\begin{align*}
+    X_n\sim& \mathrm{ Unif }\{\pm \dfrac{ 1 }{ 2^n }\} \fallingdotseq \dfrac{ 1 }{ 2 }\big( e^{i/2^n t}+e^{-i/2^n t} \big)   =\cos(\dfrac{ t }{ 2^n })\\
+    Y_n:=& \sum_{i=1}^n X_i \sim \mathrm{ Unif }\{ \dfrac{ k }{ 2^n }  \}_{k=-2^n+1}^{2^n-1}\\ 
+    Z\sim & \mathrm{ Unif }[-1,1] \fallingdotseq \dfrac{ \sin t }{ t }
+\end{align*}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item We note that $ Z\mathop{ = }\limits^{\mathrm{ d } } \mathrm{ Unif }(-\dfrac{ 1 }{ 2 }, \dfrac{ 1 }{ 2 }  ) + X_1  $ (which is easy to verify following the same proof as in Exercise. \ref{sec:die_roll_plus_uniform}). We thus have
+    \begin{align*}
+        &\dfrac{ \sin t }{ t }\risingdotseq Z \mathop{ = }\limits^{\mathrm{ d } } \mathrm{ Unif }(-\dfrac{ 1 }{ 2 }, \dfrac{ 1 }{ 2 }  ) + X_1  \fallingdotseq \dfrac{ \sin(t/2) }{ t/2 } \cdot \cos(t/2) \\
+         \Rightarrow & \dfrac{ \sin t }{ t }=\dfrac{ \sin(t/2) }{ t/2 } \cdot \cos(t/2) 
+    \end{align*}
+    \item We further have $ Y_n \xrightarrow[]{\mathrm{d}} Z $ by noticing the following:
+    \begin{align*}
+        \forall \xi \in [-1,1]:\,\mathbb{P}\left( Y_n \geq \xi  \right)  \mathop{ \rightarrow }\limits_{n\to\infty }\mathbb{P}\left( Z \geq \xi  \right)  .
+    \end{align*}
+    Thus we can conclude convergence in characteristic functions:
+    \begin{align*}
+        &\prod_{i=1}^n \cos(\dfrac{ t }{ 2^i })\risingdotseq \sum_{i=1}^n X_i = Y_n \xrightarrow[]{\mathrm{d}} Z \fallingdotseq \dfrac{ \sin t }{ t }\\
+         \Rightarrow & \dfrac{ \sin t }{ t } = \prod_{i=1}^\infty \cos(\dfrac{ t }{ 2^i }),\quad \forall t\in \mathbb{R}.
+    \end{align*}
+\end{itemize}
+
+    
+
+\section{Poisson approximation to the binomial; exponential approximation to the geometric}
+(This time we prove them "by hand")
+
+\subsection{Poisson approximation to the Binomial distribution}
+
+We have $ \forall k\in \mathbb{N}^+: $
+\begin{align*}
+    \mathbb{P}\left( \mathrm{ Bin }(n,p_n) = k \right) =&  \binom{n}{k} p_n^k (1-p_n)^{n-k} \\
+    =&  \dfrac{ 1 }{ k! }\dfrac{ n! }{ (n-k)! }\cdot \dfrac{ 1 }{ n^n } (np_n)^k (n-np_n)^{n-k} \\
+    =& \dfrac{ 1 }{ k! }(n^k + o(n^k))\cdot \dfrac{ 1 }{ n^n } (\lambda +o(1))^k (n-\lambda +o(1))^{n-k} \\
+    =& \dfrac{ (\lambda +o(1))^k }{ k! }\dfrac{ (n^k + o(n^k))\cdot(n-\lambda +o(1))^{n-k}  }{ n^n } \\
+    =&\dfrac{ (\lambda +o(1))^k }{ k! }\big(1 - \dfrac{ \lambda  }{ n } + o(n^{-1}) \big)^n\\
+    \xrightarrow[]{n\to\infty} & \dfrac{ \lambda^k }{ k! }e^{-\lambda }\sim \mathrm{ Poi }(\lambda ) 
+\end{align*}
+Thus we have proved the Poisson approximation to the Binomial distribution.
+
+
+\subsection{Exponential approximation to the Geometric distribution}
+We have $ \forall t \geq 0$ that 
+\begin{align*}
+    \mathbb{P}\left( pX_p > t \right) =& \mathbb{P}\left( \mathrm{ Geom }(p)  > t/p \right)= \sum_{k= \left\lceil t/p\right\rceil } ^\infty (1-p)^{k-1}p=(1-p)^{\left\lfloor t/p \right\rfloor } 
+\end{align*}
+
+Note that
+\begin{align*}
+    (1-p)^{t/p} \xrightarrow[]{p\to 0} e^{-t},\quad (1-p)^{t/p-1} \xrightarrow[]{p\to 0} e^{-t}
+\end{align*}
+we have
+\begin{align*}
+    \mathbb{P}\left( pX_p > t \right) =&(1-p)^{\left\lfloor t/p \right\rfloor } \xrightarrow[]{p\to 0} e^{-t} = \mathbb{P}\left( \mathrm{ Exp }(1) > t \right)
+\end{align*}
+
+Thus we have proved the Exponential approximation to the Geometric distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

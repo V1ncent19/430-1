@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Characteristic functions}{1}{section.1}%
+\contentsline {section}{\numberline {2}Die roll plus uniform}{2}{section.2}%
+\contentsline {section}{\numberline {3}Difference of two i.i.d. random variables}{2}{section.3}%
+\contentsline {section}{\numberline {4}Trigonometric identities}{2}{section.4}%
+\contentsline {section}{\numberline {5}Poisson approximation to the binomial; exponential approximation to the geometric}{3}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Poisson approximation to the Binomial distribution}{3}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Exponential approximation to the Geometric distribution}{3}{subsection.5.2}%
