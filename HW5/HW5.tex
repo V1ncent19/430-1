@@ -124,7 +124,7 @@ Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
 \hrule
 \vspace{12pt}
 
-\textbf{Notation:} I use $ \fallingdotseq $ for Fourier transform and $ \risingdotseq $ for inverse Fourier transform. i.e. $ f(x)\fallingdotseq \phi (t) $ and $ \phi (t)\risingdotseq f(x) $. $ \mathrm{ Res }_f(x)  $ for the residue of $ f(x) $ at $ x $. Dirac delta function (at zero) is denoted as $ \delta (x) $ s.t. $ \int_{-\infty}^\infty \delta (x) \,\mathrm{d}x=1 $.
+\textbf{Notation:} I use $ \fallingdotseq $ for Fourier transform and $ \risingdotseq $ for inverse Fourier transform. i.e. $ f(x)\fallingdotseq \phi (t) $ and $ \phi (t)\risingdotseq f(x) $. $ \mathrm{ Res }_f(x)  $ for the residue of $ f(x) $ at $ x $. Dirac delta function (at zero) is denoted as $ \delta (x) $ s.t. $ \int_{-\varepsilon }^\varepsilon \delta (x) \,\mathrm{d}x=1 ,\,\forall \varepsilon >0 $.
 
 
 
@@ -254,7 +254,7 @@ We have $ \forall t \geq 0$ that
 
 Note that
 \begin{align*}
-    (1-p)^{t/p} \xrightarrow[]{p\to 0} e^{-t},\quad (1-p)^{t/p-1} \xrightarrow[]{p\to 0} e^{-t}
+    (1-p)^{t/p} \xrightarrow[]{p\to 0} e^{-t},\quad (1-p)^{t/p-1} \xrightarrow[]{p\to 0} e^{-t},\quad (1-p)^{t/p-1}\leq (1-p)^{\left\lfloor t/p \right\rfloor } \leq (1-p)^{t/p}
 \end{align*}
 we have
 \begin{align*}
