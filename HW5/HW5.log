@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.28)  13 NOV 2024 15:36
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.28)  14 NOV 2024 18:42
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1040,17 +1040,17 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
  [1
 
-] [2] [3] (./HW5.aux)
+] [2] [3] [4] (./HW5.aux)
 Package rerunfilecheck Info: File `HW5.out' has not changed.
 (rerunfilecheck)             Checksum: 77927218749BC5E2F59152E3DE9DE4A0;1227.
  ) 
 Here is how much of TeX's memory you used:
  35426 strings out of 476683
  775511 string characters out of 5809779
- 1866012 words of memory out of 5000000
+ 1864012 words of memory out of 5000000
  55095 multiletter control sequences out of 15000+600000
  520526 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,18n,89p,500b,959s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,18n,89p,500b,928s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on HW5.pdf (3 pages).
+Output written on HW5.pdf (4 pages).

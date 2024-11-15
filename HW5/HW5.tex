@@ -139,7 +139,15 @@ Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
         \end{cases}= e^{-|x|}/2
     \end{align*}
     which is the density function of a two-sided exponential distribution.
-    \item[(b)] Not a characteristic function by noticing that $ t\mapsto e^{-t^4} $ is not bounded.
+    \item[(b)] Not a characteristic function by noticing that the characteristic function $ t\mapsto e^{-t^4} :=\phi_X(t)$ yields a $ 0 $ second moment:
+    \begin{align*}
+        \mathbb{E}\left[ X^2 \right] = & \phi_X''(0) = \dfrac{ \mathrm{d}^2 }{ \mathrm{d}t^2 }e^{-t^4}\big|_{t=0}=0
+    \end{align*}
+    which means that $ X $ is actually a degenerate r.v. with $ X=0 $ a.s., which should actually correspond to a characteristic function of $ t\mapsto 1 $ instead. Thus the contradiction arises, so $ t\mapsto e^{-t^4} $ is not a characteristic function.
+
+    \textbf{Reference:} I checked the proof in this \href{https://math.stackexchange.com/questions/1266578/show-that-exp-t4-is-not-a-characteristic-function?noredirect=1&lq=1}{Mathexchange post}.
+    
+    
     \item[(c)] Not a characteristic function by noticing that $ \sin(t)\big|_{t=0}=0\neq 1 $, thus does not satisfy the condition of Bochner's theorem.
     \item[(d)] Note that $ t\mapsto \cos(t) $ has inverse Fourier transform as follows:
     \begin{align*}
