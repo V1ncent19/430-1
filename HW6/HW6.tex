@@ -1,0 +1,248 @@
+\documentclass[11pt,a4paper]{article}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+
+\begin{document}
+
+\begin{center}\thispagestyle{plain}
+
+{\LARGE\textbf{STAT 430-1, Fall 2024}}
+
+{\Large\textbf{HW6}}
+
+Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
+\end{center}
+
+\thispagestyle{myheadings}\markright{Compiled using \LaTeX}
+\pagestyle{myheadings}\markright{Tuorui Peng}
+
+% show only sections level in contents
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+  
+
+% \section{Kronecker Lemma}
+
+% The condition $ \sum_{k=1}^\infty \dfrac{ a_k }{ k }<\infty  $ is equivalent to that: $ \forall  \varepsilon >0 $, there exists $ N $ such that $ \forall M>N $, $ \sum\limits_{k=N}^M \dfrac{ a_k }{ k }<\varepsilon  $. Then we have:
+% \begin{align*}
+%     \dfrac{ 1 }{ M  } \sum_{k=1}^M  a_k \leq & \dfrac{ 1 }{ M  } \sum_{k=1}^{N-1}  a_k + \sum_{k=N}^M  \dfrac{ a_k }{ k } \leq \dfrac{ 1 }{ M  } \sum_{k=1}^N  a_k + \varepsilon
+% \end{align*}
+% then by noticing that $ \dfrac{ 1 }{ M  } \sum\limits_{k=1}^{N-1}  a_k \xrightarrow[]{M\to\infty}  0 $, we are able to control the left side up to any precision. Thus we have
+% \begin{align*}
+%     \dfrac{ 1 }{ M  } \sum_{k=1}^M  a_k \to 0 ,\quad M\to\infty
+% \end{align*}
+
+
+
+\vspace{12pt}
+
+
+\hrule
+\vspace{12pt}
+
+\textbf{Notation:} I use $ \fallingdotseq $ for Fourier transform and $ \risingdotseq $ for inverse Fourier transform. i.e. $ f(x)\fallingdotseq \phi (t) $ and $ \phi (t)\risingdotseq f(x) $. $ \mathrm{ Res }_f(x)  $ for the residue of $ f(x) $ at $ x $. Dirac delta function (at zero) is denoted as $ \delta (x) $ s.t. $ \int_{-\varepsilon }^\varepsilon \delta (x) \,\mathrm{d}x=1 ,\,\forall \varepsilon >0 $.
+
+
+
+\section{Self-normalized sum}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item \textbf{Denominator:} By SLLN and continuous mapping theorem, we have
+    \begin{align*}
+        \sqrt{\dfrac{ \sum_{i=1}^n X_i^2 }{ n } } \xrightarrow[]{\mathrm{a.s.}} \sqrt{ \mathbb{E} X_1^2 } = \sqrt{1/3}
+    \end{align*}
+    \item \textbf{Numerator:} By CLT, we have
+    \begin{align*}
+        \dfrac{ \sum_{i=1}^n X_i }{ \sqrt{n}\cdot var(X_1) } = \dfrac{ \sum_{i=1}^n X_i }{ \sqrt{n}\sqrt{1/3} } \xrightarrow[]{\mathcal{D}} N(0,1)
+    \end{align*}
+\end{itemize}
+Combining the two, and by Slutsky's theorem, we have
+\begin{align*}
+    \dfrac{ \sum_{i=1}^n X_i }{ \sqrt{\sum_i=1}^n X_i^2 } = & \sqrt{\dfrac{ 1 }{ 3 } }\dfrac{ \sum_{i=1}^n X_i \big/ \sqrt{n}\sqrt{1/3} }{ \sqrt{\sum_{i=1}^n X_i^2 \big/ n } }   \xrightarrow[]{\mathrm{d}} N(0,1)
+\end{align*}
+
+
+\section{Geometric mean}
+
+\subsection{}
+
+It suffices to show that $\log G_n = \dfrac{ 1 }{ n }\sum_{i=1}^n \log X_i \xrightarrow[]{\mathrm{a.s.}} -1   $ by continuous mapping theorem. 
+
+To show that we notice that with $ X_i\mathop{ \sim  }\limits^{i.i.d.} \mathrm{ Unif }(0,1)   $, we have $ -\log X_i \mathop{ \sim }\limits^{i.i.d.}\mathrm{ Exp }(1)   $, thus we have by SLLN
+\begin{align*}
+    \dfrac{ 1 }{ n }\sum_{i=1}^n \log X_i \xrightarrow[]{\mathrm{a.s.}} -\mathbb{E}\left[ \mathrm{ Exp }(1)  \right] = -1
+\end{align*}
+thus finishes the proof that $ G_n\xrightarrow[]{\mathrm{a.s.}} e^{-1} $.
+
+\subsection{}
+Still use the log transformation, we have
+\begin{align*}
+    \log (eG_n)^{\sqrt{n}} = \sqrt{n}\left( 1+\dfrac{ 1 }{ n }\sum_{i=1}^n \log X_i \right) \xrightarrow[(1)]{\mathrm{d}} N(0,1)
+\end{align*}
+in which (1) is by CLT by noticing that $ \mathbb{E}\left[ \log X_1 \right] =-1 $ and $ \mathrm{Var}\left[ \log X_1 \right] =1 $. Thus by continuous mapping theorem applied to $ \xi \mapsto \exp \xi  $, we have
+\begin{align*}
+    (eG_n)^{\sqrt{n}} \xrightarrow[]{\mathrm{d}} \exp N(0,1) \sim \mathrm{ LogNormal }(0,1) 
+\end{align*}
+in which $ \mathrm{ LogNormal }(0,1)  $ is the \href{https://en.wikipedia.org/wiki/Log-normal_distribution}{log-normal distribution}, with density function
+\begin{align*}
+    f_\mathrm{ LogNormal(0,1) }(x) = \dfrac{ 1 }{ x\sqrt{2\pi} }\exp\left( -\dfrac{ (\log x)^2 }{ 2 } \right)
+\end{align*}
+
+\section{Weak convergence for finitely supported distributions}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item["$  \Rightarrow  $"] Given that $ \mathbb{P}\left( X_n=k \right)\xrightarrow[]{n\to\infty} \mathbb{P}\left( X=k \right),\,\forall k\in S  $, we have also that $ \forall k\in S $:
+    \begin{align*}
+        \mathbb{P}\left( X_n\leq k \right) = & \sum_{i=1}^k \mathbb{P}\left( X_n=i \right) \xrightarrow[]{n\to\infty} \sum_{i=1}^k \mathbb{P}\left( X=i \right) = \mathbb{P}\left( X\leq k \right) 
+    \end{align*}
+    thus we have $ X_n\xrightarrow[]{\mathrm{d}}  X $.
+    \item["$  \Leftarrow  $"] Given that $ X_n\xrightarrow[]{\mathrm{d}}  X $, we have that $ \forall k\in S $:
+    \begin{align*}
+        \mathbb{P}\left( X_n=k \right) = & \mathbb{P}\left( X_n\leq k \right) - \mathbb{P}\left( X_n\leq k-1 \right) \xrightarrow[]{n\to\infty} \mathbb{P}\left( X\leq k \right) - \mathbb{P}\left( X\leq k-1 \right) = \mathbb{P}\left( X=k \right)
+    \end{align*}
+    (with a trivial fix for $ k=0 $ that $ \mathbb{P}\left( X_n=0 \right)\to\mathbb{P}\left( X=0 \right)  $ automatically holds). Thus we have $ \mathbb{P}\left( X_n=k \right)\xrightarrow[]{n\to\infty} \mathbb{P}\left( X=k \right),\,\forall k\in S  $.
+
+\end{itemize}
+
+
+\section{Coupling Poisson distributions}
+
+Note that for independent Poisson random variables $ W,Z $ with parameters $ \nu _1,\nu _2 $, we have $ W+Z\sim \mathrm{ Poisson }(\nu _1+\nu _2)  $. The proof is as follows:
+\begin{proof}
+    Using characteristic function, we have
+    \begin{align*}
+        W+Z\fallingdotseq & \exp\left( \nu _1(e^{it}-1) \right) \exp\left( \nu _2(e^{it}-1) \right) = \exp\left( (\nu _1+\nu _2)(e^{it}-1) \right) \risingdotseq \mathrm{ Poisson }(\nu _1+\nu _2) .
+    \end{align*}    
+\end{proof}
+
+Thus for the Poisson distributed random variables $ X,Y $ with parameter $ \lambda ,\mu  $, respectively, we can construct a $ \delta \sim \mathrm{ Poisson }(\mu -\lambda ) \geq 0  $ and by the above property we have a coupling of $ X,Y $ that 
+\begin{align*}
+    Y' = X'+\delta \sim \mathrm{ Poisson }(\lambda +\mu ),\qquad X'\sim \mathrm{ Poisson }(\lambda ),\qquad \delta \sim \mathrm{ Poisson }(\mu -\lambda ) \geq 0.
+\end{align*}
+and thus proves that $ Y $ first-order stochastically dominates $ X $.
+
+
+    
+
+
+\section{Coupling Exponential distributions}
+Using log transform, we have that 
+\begin{align*}
+    \mathrm{ Exp }(\lambda ) \sim -\dfrac{ 1 }{ \lambda  }  \log \mathrm{ Unif }(0,1) 
+\end{align*}
+thus we can construct a coupling of exponential random variables $ U,V $ with parameters $ \lambda ,\mu  $, respectively, that
+\begin{align*}
+    V'= -\dfrac{ \mu  }{ 1 }\log e^{-\lambda U'} = \dfrac{ \lambda  }{ \mu  }U'  \sim \mathrm{ Exp }(\mu )   ,\quad U'\sim \mathrm{ Exp }(\lambda )
+\end{align*}
+in which we notice that $ 0<\lambda <\mu  \Leftrightarrow V'< U' $, thus we have $ V $ first-order stochastically dominates $ U $.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+\end{document}
